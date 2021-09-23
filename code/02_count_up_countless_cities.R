@@ -19,11 +19,12 @@ input_file_name <- "output/applemobilitytrends-2021-09-19_Florida.csv"
 state_data <- read.csv(input_file_name)
 
 # starting off with dplyr chains
-count_of_cities_counties_by_transportation <- state_data %>%
+count_cities_counties_by_type <- state_data %>%
   select(geo_type, region, transportation_type) %>%
   # filter(transportation_type == "driving") %>%
   group_by(geo_type, transportation_type) %>%
   tally()
 
-write.csv(count_of_cities_counties_by_transportation,
+#write out the result of the dplyr chain
+write.csv(count_cities_counties_by_type,
           "output/florida_cities_counties_counts.csv")
