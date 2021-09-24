@@ -12,6 +12,7 @@ It currently uses dplyr to work with some of the tabular data. Eventually, it wi
 
 ### Change Log
 
+* 2021-09-24: Turned the second script into a function. Updated the first and second script to run inside a for loop.
 * 2021-09-23: Added second script to use dplyr to tally up the count of cities and counties in a given state that have data from different transportation types.
 * 2021-09-22: Initialize a git repository in this project.
 * 2021-09-20: A new version of the data file was downloaded, and I also worked to refactor the code to be more general and to allow for any state to be subset from the larger file.
