@@ -12,6 +12,7 @@ It currently uses dplyr to work with some of the tabular data. Eventually, it wi
 
 ### Change Log
 
+* 2021-09-29: Added third script to use tidyr to convert the subsetted state datasets from wide to long form.
 * 2021-09-24: Turned the second script into a function. Updated the first and second script to run inside a for loop.
 * 2021-09-23: Added second script to use dplyr to tally up the count of cities and counties in a given state that have data from different transportation types.
 * 2021-09-22: Initialize a git repository in this project.
