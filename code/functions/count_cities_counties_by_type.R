@@ -8,7 +8,7 @@
 # September 23, 2021
 
 # load the package "dplyr"
-library("dplyr")
+library(dplyr)
 
 # create a function to create counts of cities and counties in any given
 # subsetted US state sorted by transportation type. this should also create
