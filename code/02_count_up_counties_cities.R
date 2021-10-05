@@ -11,7 +11,7 @@ source("code/functions/count_cities_counties_by_type.R")
 
 # test out the use of the function
 # update the script to run inside a for loop
-state_name <- paste0(c("Florida", "California", "Texas", "New York",
+state_name <- paste0(c("Florida", "California", "Texas", "New_York",
                        "Washington", "Nevada", "Virginia"))
 
 for (input_state_file_name in paste0("output/subset_state/applemobilitytrends-",
