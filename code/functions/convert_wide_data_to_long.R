@@ -17,7 +17,7 @@ convert_wide_data_to_long <- function(state_name) {
                               ".csv")
 
   wide_to_long_state <- pivot_longer(read_csv(subset_state_data),
-    cols = 7:624,
+    cols = starts_with("20"),
     names_to = "date",
     values_to = "relative_mobility"
   )
