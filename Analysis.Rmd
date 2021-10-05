@@ -85,7 +85,7 @@ tallied_subset <- count_cities_counties_by_type(
 tallied_plot <- ggplot(data = tallied_subset,
                        aes(x = geo_type,
                            y = n,
-                           fill = transportation_type)) + 
+                           fill = transportation_type)) +
   geom_col(position = position_dodge()) +
   labs(title = paste("Number of cities and/or counties in",
                      state_to_analyze,
@@ -134,6 +134,5 @@ timeseries_plot
 ```{r session-info}
 devtools::session_info()
 ```
-
 
 ## Sources Cited
