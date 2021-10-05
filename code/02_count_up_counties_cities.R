@@ -14,7 +14,8 @@ source("code/functions/count_cities_counties_by_type.R")
 state_name <- paste0(c("Florida", "California", "Texas", "New York",
                        "Washington", "Nevada", "Virginia"))
 
-for (input_state_file_name in paste0("output/applemobilitytrends-2021-10-03_",
+for (input_state_file_name in paste0("output/subset_state/applemobilitytrends-",
+                                     "2021-10-03_",
                                      state_name,
                                      ".csv"))  {
   count_cities_counties_by_type(input_state_file_name)
