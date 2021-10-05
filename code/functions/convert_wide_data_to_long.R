@@ -12,7 +12,7 @@ library(tidyr)
 # this should also create an output CSV file that is named based on the state
 convert_wide_data_to_long <- function(state_name) {
   subset_state_data <- paste0("output/subset_state/applemobilitytrends-",
-                              "2021-09-21_",
+                              "2021-10-03_",
                               state_name,
                               ".csv")
 

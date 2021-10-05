@@ -15,6 +15,6 @@ source("code/functions/subset_mobility_data_to_state.R")
 for (state_to_subset in paste0(c("Florida", "California", "Texas", "New York",
                                  "Washington", "Nevada", "Virginia"))) {
   subset_mobility_data_to_state(
-  input_file_name = "data/raw_data/applemobilitytrends-2021-09-21.csv",
+  input_file_name = "data/raw_data/applemobilitytrends-2021-10-03.csv",
   state_to_subset)
 }
