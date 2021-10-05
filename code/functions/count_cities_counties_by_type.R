@@ -21,6 +21,7 @@ count_cities_counties_by_type <- function(input_state_file_name) {
   # use dplyr chains to select and filter the data. then tally the number of
   # cities and counties with mobility data, sorted by transportation type.
   count_state_transportation <- state_subset_data %>%
+    filter(!is.na(geo_type)) %>%
     select(geo_type, region, transportation_type) %>%
     group_by(geo_type, transportation_type) %>%
     tally()
