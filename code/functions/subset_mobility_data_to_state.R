@@ -20,7 +20,7 @@ subset_mobility_data_to_state <- function(input_file_name,
   # Subset the dataset to only include rows where the sub.region column has
   # the state name in it. We want all columns.
   us_data <- all_covid_data %>%
-    filter(country == "United States")
+    dplyr::filter(country == "United States")
   state_data <- us_data[us_data$`sub-region` == state_to_subset, ]
 
   # check that the subsetted data actually has data in it

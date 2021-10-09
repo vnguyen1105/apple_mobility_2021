@@ -17,15 +17,15 @@ library(readr)
 
 count_cities_counties_by_type <- function(input_state_file_name) {
   # read in the subsetted state csv file
-  state_subset_data <- read_csv(input_state_file_name)
+  state_subset_data <- readr::read_csv(input_state_file_name)
 
   # use dplyr chains to select and filter the data. then tally the number of
   # cities and counties with mobility data, sorted by transportation type.
   count_state_transportation <- state_subset_data %>%
-    filter(!is.na(geo_type)) %>%
-    select(geo_type, region, transportation_type) %>%
-    group_by(geo_type, transportation_type) %>%
-    tally()
+    dplyr::filter(!is.na(geo_type)) %>%
+    dplyr::select(geo_type, region, transportation_type) %>%
+    dplyr::group_by(geo_type, transportation_type) %>%
+    dplyr::tally()
 
   # check that the dplyr pipeline actually has data in it
   if (nrow(count_state_transportation) < 2) {
@@ -38,7 +38,7 @@ count_cities_counties_by_type <- function(input_state_file_name) {
 
   # write out the result of the dplyr chain as a csv named based on the input
   # file name.
-  write_csv(count_state_transportation, file = paste0("output/mobility_tally/",
+  readr::write_csv(count_state_transportation, file = paste0("output/mobility_tally/",
                                              tools::file_path_sans_ext(
                                               basename(input_state_file_name)),
                                              "_cities_counties_count.csv"))

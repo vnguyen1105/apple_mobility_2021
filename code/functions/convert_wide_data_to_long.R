@@ -16,13 +16,13 @@ convert_wide_data_to_long <- function(state_name) {
                               state_name,
                               ".csv")
 
-  wide_to_long_state <- pivot_longer(read_csv(subset_state_data),
+  wide_to_long_state <- tidyr::pivot_longer(readr::read_csv(subset_state_data),
     cols = starts_with("20"),
     names_to = "date",
     values_to = "relative_mobility"
   )
 
-  write_csv(wide_to_long_state, file = paste0("output/long_data/",
+  readr::write_csv(wide_to_long_state, file = paste0("output/long_data/",
          tools::file_path_sans_ext(basename(subset_state_data)),
          "_long.csv"))
 }
