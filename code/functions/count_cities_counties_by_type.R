@@ -38,7 +38,8 @@ count_cities_counties_by_type <- function(input_state_file_name) {
 
   # write out the result of the dplyr chain as a csv named based on the input
   # file name.
-  readr::write_csv(count_state_transportation, file = paste0("output/mobility_tally/",
+  readr::write_csv(count_state_transportation, file = paste0("output/",
+                                                             "mobility_tally/",
                                              tools::file_path_sans_ext(
                                               basename(input_state_file_name)),
                                              "_cities_counties_count.csv"))
