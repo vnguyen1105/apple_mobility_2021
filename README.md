@@ -12,6 +12,7 @@ It currently uses dplyr to work with some of the tabular data. Eventually, it wi
 
 ### Change Log
 
+* 2021-10-08: Add another plot to Rmd.
 * 2021-10-05: Add Rmd to drive entire analysis.
 * 2021-09-29: Added third script to use tidyr to convert the subsetted state datasets from wide to long form.
 * 2021-09-24: Turned the second script into a function. Updated the first and second script to run inside a for loop.
