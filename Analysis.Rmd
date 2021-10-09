@@ -14,9 +14,9 @@ knitr::opts_chunk$set(echo = TRUE, message = TRUE)
 
 ```{r set-parameters}
 # set the state to work with
-state_to_analyze <- "New York"
+state_to_analyze <- "Florida"
 
-# sanitizing the state name for output files
+# sanitize the state name for output files
 state_no_spaces <- gsub(state_to_analyze,
                         pattern = " ",
                         replacement = "_")
@@ -43,15 +43,15 @@ source("code/functions/count_cities_counties_by_type.R")
 source("code/functions/convert_wide_data_to_long.R")
 ```
 
-## Background and Objectives
+## Project Description
 
-This rmarkdown file will use `ggplot2` [@ggplot2] and `dplyr`[@dplyr] packages to analtze the Apple maps mobility data from the time before the COVID-19 pandemic through the initial shutdowns and continuing changes over the course of the year.
+This rmarkdown file will use `ggplot2` [@ggplot2] and `dplyr`[@dplyr] packages to analyze the Apple maps mobility data from the time before the COVID-19 pandemic through the initial shutdowns and continuing changes over the course of the year.
 
 The goal will be to create a subset to a particular state, tally up the number of cities and ocunties in that state with mobility data, and then to make several plot to visualize those data subsets.
 
 The state that this document will analyze is `r state_to_analyze`.
 
-## Data Processing
+## Subsetting Data
 
 ```{r subset-state}
 # subset out to the chosen state using the variables set above
@@ -91,7 +91,8 @@ tallied_plot <- ggplot(data = tallied_subset,
                      state_to_analyze,
                      "with mobility data"),
        x = "Type of area",
-       y = "Number of areas")
+       y = "Number of areas") +
+  scale_fill_discrete(name = "Transportation type")
 
 ggsave(plot = tallied_plot,
        filename = paste0("output/figures/",
@@ -127,6 +128,47 @@ ggsave(plot = timeseries_plot,
                          "_timeseries_plot.png"))
 
 timeseries_plot
+```
+
+```{r plot-relative-mobility-change-time-series}
+# produce a bar plot of relative driving mobility across the state with
+# time on the x axis and mean relative mobility on the y axis while expressing
+# the change in mean relative mobility as negative or positive with respect to
+# the first available data
+filter_long_data <- long_subset %>%
+  filter(transportation_type == "driving") %>%
+  group_by(date) %>%
+  summarize(mean_mobility = mean(relative_mobility)) %>%
+  mutate(pos = mean_mobility >= 100)
+
+# shift the y axis scale to the first mean relative mobility value, 100
+y_axis_shift <- scales::trans_new("shift",
+                             transform = function(x) (x - 100),
+                             inverse = function(x) (x + 100))
+
+change_in_mobility_plot <- ggplot(filter_long_data, aes(
+  lubridate::ymd(date), mean_mobility, fill = pos)) +
+  geom_bar(stat = "identity") +
+  scale_y_continuous(trans = y_axis_shift) +
+  labs(title = paste("Change in statewide mean relative mobility driving",
+                     "levels in",
+                     state_to_analyze,
+                     "during COVID"),
+       x = "Date",
+       y = "Mean relative mobility") +
+  scale_fill_discrete(
+    name = "Type of Change",
+    guide = guide_legend(reverse = TRUE),
+    labels = c("Negative change", "Positive change"))
+  
+ggsave(plot = change_in_mobility_plot,
+       filename = paste0("output/figures/",
+                         core_name,
+                         "_",
+                         state_no_spaces,
+                         "_change_in_mobility_timeseries_plot.png"))
+
+change_in_mobility_plot
 ```
 
 ## Session Info
