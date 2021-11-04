@@ -23,3 +23,5 @@ clean:
 	rm -fv output/*tally.txt
 	rm -fv output/*/*.csv
 	rm -fv output/*/*.png
+
+.PHONY: all clean
