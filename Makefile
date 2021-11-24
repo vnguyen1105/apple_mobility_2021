@@ -15,12 +15,13 @@ $(REPORT_PATH): Analysis.Rmd references.bib $(R_FUNCTIONS) $(SEQ_SUMMARY) $(MOBI
 	bash run_analyze_covid_pipeline.sh "$(STATE)" "$(MOBILITY_DATA)" "$(SEQ_SUMMARY)"
 
 $(SEQ_SUMMARY): code/process_sequences.sh $(SEQ_DATA)
-	bash process_sequences.sh "$(SEQ_DATA)" > "$(SEQ_SUMMARY)"
+	bash code/process_sequences.sh "$(SEQ_DATA)" > "$(SEQ_SUMMARY)"
 
 clean:
 	rm -fv output/*.html
 	rm -fv Analysis.html
 	rm -fv output/*/*.csv
 	rm -fv output/*/*.png
+	rm -fv output/*.txt
 
 .PHONY: all clean
